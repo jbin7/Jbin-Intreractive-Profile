@@ -21,7 +21,7 @@ export async function drawObject(container) {
   PIXI.Assets.addBundle('fonts', {
     DungGeunMo: DungGeunMo,
   });  
-  let a =  await PIXI.Assets.load('src/assets/font/DungGeunMo/DungGeunMo.woff2')
+  let a =  await PIXI.Assets.load(DungGeunMo)
   
     
   const text1 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 30, fill: '#ffffff' }));
