@@ -17,7 +17,7 @@ const manifestExample = {
       assets: [
           {
               name: 'background',
-              srcs: 'src/assets/img/background/background1.png',
+              srcs: '/assets/img/background/background1.png',
           },
       ],
   },
@@ -26,23 +26,23 @@ const manifestExample = {
       assets: [
           {
               name: 'title',
-              srcs: 'src/assets/img/object/title.png',
+              srcs: '/assets/img/object/title.png',
           },
           {
             name: 'block',
-            srcs: 'src/assets/img/object/block2.png',
+            srcs: '/assets/img/object/block2.png',
           },      
           {
             name: 'tree',
-            srcs: 'src/assets/img/object/tree.png',
+            srcs: '/assets/img/object/tree.png',
           },                  
           {
             name: 'wreck',
-            srcs: 'src/assets/img/object/wreck.png',
+            srcs: '/assets/img/object/wreck.png',
           },    
           {
             name: 'billboard1',
-            srcs: 'src/assets/img/object/billboard1.png',
+            srcs: '/assets/img/object/billboard1.png',
           },                        
       ],
   },
@@ -51,7 +51,7 @@ const manifestExample = {
     assets: [
         {
             name: 'avatar',
-            srcs: 'src/assets/img/avatar/megaman.png',
+            srcs: '/assets/img/avatar/megaman.png',
         },
     ],
   },{
@@ -59,7 +59,7 @@ const manifestExample = {
     assets: [
         {
             name: 'dungGeunMo',
-            srcs: 'src/assets/font/DungGeunMo.woff',
+            srcs: '/assets/font/DungGeunMo.woff',
         },
     ],
   }],
