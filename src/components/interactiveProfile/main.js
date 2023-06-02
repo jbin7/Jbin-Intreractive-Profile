@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import {loadAssets} from './loadAssets'
 import { avatar } from "./avatar";
 import { drawObject } from "./object";
 
@@ -6,8 +7,11 @@ import backgroundImg from '@/assets/img/background/background1.png'
 
 
 
-export async function drawPixi(el) {
-    
+export async function drawPixi(el) {  
+  
+  let asd  = await loadAssets()
+  console.log(asd)
+  
   // 가로세로 비율 유지를 위한 변수
   const heightRatio = 0.5625;
   let standardWidth = 1680
@@ -26,13 +30,13 @@ export async function drawPixi(el) {
   });
   el.value.appendChild(app.view);
 
-
   // 화면 리사이징
   if(el.value.clientWidth < standardWidth) {
     app.view.style.width = el.value.clientWidth + 'px';
     app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';        
   }
   
+
   // 배경 이미지
   const texture = await PIXI.Assets.load(backgroundImg);  
   const sprite = new PIXI.Sprite(texture);
@@ -137,9 +141,6 @@ export async function drawPixi(el) {
   function moveLeft () {
     container.x += 10
   }  
-
-
-
 
   // 애플리케이션 크기 조정 함수
   function resizeApp() {    

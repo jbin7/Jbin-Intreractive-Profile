@@ -8,8 +8,7 @@ let bottomY = 675
 
 export const avatar = {
   async base() {
-    // 아바타 스프라이트 시트 기본 생성 및 리턴 함수
-    
+    // 아바타 스프라이트 시트 기본 생성 및 리턴 함수    
     const avatarTexture = await PIXI.Assets.load(texture);
     const spritesheet = new PIXI.Spritesheet(
       avatarTexture,
