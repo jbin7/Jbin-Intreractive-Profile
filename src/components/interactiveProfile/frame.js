@@ -1,4 +1,4 @@
-export const atlasData = {
+export const avatarFrameData = {
 	frames: {
     standing1: {
 			frame: { x: 1, y:145, w:74, h:80 },
@@ -51,7 +51,11 @@ export const atlasData = {
 	},
 	animations: {
 		run: ['run1', 'run2', 'run3', 'run4'],
-    standing: ['standing1', 'standing2', 'standing3']
-    
+    standing: [
+			'standing1','standing1', 'standing1', 
+			'standing1', 'standing1', 'standing1', 
+			'standing1', 'standing1','standing1', 
+			'standing1', 'standing1', 'standing1',
+		 	'standing2', 'standing3'],		  
 	}
 }

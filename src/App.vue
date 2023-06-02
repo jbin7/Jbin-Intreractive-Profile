@@ -1,5 +1,5 @@
 <script setup>
-import GameDisplay from './components/GameDisplay.vue'
+import GameDisplay from './components/interactiveProfile/GameDisplay.vue'
 
 </script>
 
