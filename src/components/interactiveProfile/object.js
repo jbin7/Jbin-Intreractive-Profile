@@ -1,11 +1,4 @@
 import * as PIXI from "pixi.js";
-import DungGeunMo from '@/assets/font/DungGeunMo/DungGeunMo.woff'
-import blockImg from '@/assets/img/object/block2.png'
-import treeImg from '@/assets/img/object/tree.png'
-import titleImg from '@/assets/img/object/title.png'
-import wreckImg from '@/assets/img/object/wreck.png'
-import billboard1Img from '@/assets/img/object/billboard1.png'
-
 
 
 let standardWidth = 1680
@@ -15,8 +8,8 @@ let bottomY = 675
 
 export async function drawObject(container) {
   const ticker = PIXI.Ticker.shared;
+  const loadAvatarAssets = await PIXI.Assets.loadBundle('load-object');      
   
-  const font = await PIXI.Assets.load(DungGeunMo); 
   const text1 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 30, fill: '#ffffff' }));
   const text2 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 50, fill: '#ffffff' }));  
   container.addChild(text1)
@@ -24,8 +17,7 @@ export async function drawObject(container) {
   container.addChild(text2)
 
   // 타이틀
-  const titleTexture = await PIXI.Assets.load(titleImg);  
-  const title = PIXI.Sprite.from(titleTexture);
+  const title = PIXI.Sprite.from(loadAvatarAssets.title);
   title.width = 600
   title.height = 350
   title.x = 550
@@ -40,9 +32,8 @@ export async function drawObject(container) {
     }
   }
 
-   // 전광판 1
-   const billboardTexture = await PIXI.Assets.load(billboard1Img); 
-   const billboard = PIXI.Sprite.from(billboardTexture);
+   // 전광판 1   
+   const billboard = PIXI.Sprite.from(loadAvatarAssets.billboard1);
    billboard.width = 240 * 3.5
    billboard.height = 180 * 3.5
    billboard.x = 500
@@ -50,8 +41,7 @@ export async function drawObject(container) {
    container.addChild(billboard);    
 
   // 
-  const wreckTexture = await PIXI.Assets.load(wreckImg); 
-  const wreck = PIXI.Sprite.from(wreckTexture);
+  const wreck = PIXI.Sprite.from(loadAvatarAssets.wreck);
   wreck.width = 424 * 4
   wreck.height = 96 * 4
   wreck.x = 2000
@@ -60,9 +50,8 @@ export async function drawObject(container) {
 
   // 나무
   let treeX = 0
-  const treeTexture = await PIXI.Assets.load(treeImg); 
   for(let i = 0 ; i < 100 ; i ++) {
-    const tree = PIXI.Sprite.from(treeTexture);
+    const tree = PIXI.Sprite.from(loadAvatarAssets.tree);
     tree.width = 42 * 3
     tree.height = 57 * 3
     tree.x = treeX;
@@ -72,10 +61,9 @@ export async function drawObject(container) {
   }  
 
   // 바닥 블록
-  let blockX = 0
-  const blockTexture = await PIXI.Assets.load(blockImg); 
+  let blockX = 0  
   for(let i = 0 ; i < 100 ; i ++) {
-    const block = PIXI.Sprite.from(blockTexture);    
+    const block = PIXI.Sprite.from(loadAvatarAssets.block);    
     block.width = 127 *2
     block.height = 78 *2   
     block.x = blockX;

@@ -3,14 +3,11 @@ import {loadAssets} from './loadAssets'
 import { avatar } from "./avatar";
 import { drawObject } from "./object";
 
-import backgroundImg from '@/assets/img/background/background1.png'
-
 
 
 export async function drawPixi(el) {  
   
-  let asd  = await loadAssets()
-  console.log(asd)
+  await loadAssets()  
   
   // 가로세로 비율 유지를 위한 변수
   const heightRatio = 0.5625;
@@ -20,8 +17,7 @@ export async function drawPixi(el) {
 
   
   // 픽시 애플리케이션 생성
-  const app = new PIXI.Application({ 
-    backgroundImg: backgroundImg, 
+  const app = new PIXI.Application({     
     width: standardWidth,
     height: standardHeight,
     resolution: window.devicePixelRatio,
@@ -36,10 +32,10 @@ export async function drawPixi(el) {
     app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';        
   }
   
-
-  // 배경 이미지
-  const texture = await PIXI.Assets.load(backgroundImg);  
-  const sprite = new PIXI.Sprite(texture);
+  
+  // 배경 이미지  
+  const loadBackgroundAssets = await PIXI.Assets.loadBundle('load-background');
+  const sprite = new PIXI.Sprite(loadBackgroundAssets.background);
   sprite.width = standardWidth;
   sprite.height = standardHeight;
   app.stage.addChild(sprite);

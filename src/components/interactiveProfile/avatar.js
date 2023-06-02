@@ -1,5 +1,4 @@
 import * as PIXI from "pixi.js";
-import texture from '@/assets/img/avatar/megaman.png'
 
 let standardWidth = 1680
 let standardHeight = 900
@@ -9,9 +8,9 @@ let bottomY = 675
 export const avatar = {
   async base() {
     // 아바타 스프라이트 시트 기본 생성 및 리턴 함수    
-    const avatarTexture = await PIXI.Assets.load(texture);
+    const loadAvatarAssets = await PIXI.Assets.loadBundle('load-avatar');    
     const spritesheet = new PIXI.Spritesheet(
-      avatarTexture,
+      loadAvatarAssets.avatar,
       avatarFrameData
     );
   
