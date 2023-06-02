@@ -1,8 +1,9 @@
 import * as PIXI from "pixi.js";
 import { avatar } from "./avatar";
-import backgroundImg from '@/assets/img/background/background.png'
-import blockImg from '@/assets/img/object/block.png'
-import treeImg from '@/assets/img/object/tree.png'
+import { drawObject } from "./object";
+
+import backgroundImg from '@/assets/img/background/background1.png'
+
 
 
 export async function drawPixi(el) {
@@ -26,6 +27,8 @@ export async function drawPixi(el) {
   });
   el.value.appendChild(app.view);
 
+
+  // 화면 리사이징
   if(el.value.clientWidth < standardWidth) {
     app.view.style.width = el.value.clientWidth + 'px';
     app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';        
@@ -41,30 +44,8 @@ export async function drawPixi(el) {
   // 컨테이너 및 오브젝트
   const container = new PIXI.Container();
   app.stage.addChild(container);
+  drawObject(container)
   
-  // 바닥 블록
-  let blockX = 0
-  for(let i = 0 ; i < 100 ; i ++) {
-    const block = PIXI.Sprite.from(blockImg);    
-    block.width = 600
-    block.height = 200    
-    block.x = blockX;
-    block.y = standardHeight - block.height
-    container.addChild(block)
-    blockX += block.width
-  }
-  // 나무
-  let treeX = 0
-  for(let i = 0 ; i < 100 ; i ++) {
-    const tree = PIXI.Sprite.from(treeImg);
-    tree.width = 120
-    tree.height = 200
-    tree.x = treeX;
-    tree.y = standardHeight - 400
-    container.addChild(tree)
-    treeX += tree.width
-  }
-
   // 좌 우 클릭영역
   const leftArea = new PIXI.Graphics();
   const rightArea = new PIXI.Graphics();
@@ -89,27 +70,38 @@ export async function drawPixi(el) {
 
   // 아바타
   let standing = await avatar.actinos.standing()
-  standing.animationSpeed = 0.1 ;
-  standing.play();
-  standing.width = standing.width*1.8
-  standing.height = standing.height*1.8
-  standing.x = standardWidth/2
-  standing.y = 660
-  app.stage.addChild(standing);  
-
   let run = await avatar.actinos.run()
-  run.animationSpeed = 0.1 ;
-  run.play();
-  run.width = run.width*1.8
-  run.height = run.height*1.8 
-  run.x = standardWidth/2
-  run.y = 660
+  let teleport = await avatar.actinos.teleport()
+  let appear = await avatar.actinos.appear() 
+  app.stage.addChild(standing);
+
+  // window.setTimeout(()=>{
+  //   app.ticker.add(startTeleport)
+  // },1000)
+  
+  let is_telport = true
+  // function startTeleport() {    
+  //   teleport.y = teleport.y+50
+  //   if(teleport.y > 660 ){
+  //     app.ticker.remove(startTeleport)
+  //     app.stage.removeChild(teleport)
+  //     app.stage.addChild(appear);      
+  //   }
+  //   window.setTimeout(()=> {
+  //     app.stage.removeChild(appear)
+  //     app.stage.addChild(standing);
+  //     is_telport = true
+  //   },600)
+  // }
   
   
 
   
   
   function onClickRight() {
+    if(!is_telport) {
+      return
+    }
     standing.scale.x= 1.8;
     run.scale.x= 1.8;
     app.stage.removeChild(standing);
@@ -118,6 +110,9 @@ export async function drawPixi(el) {
   }
 
   function onClickLeft() {
+    if(!is_telport) {
+      return
+    }    
     standing.scale.x=-1.8;
     run.scale.x=-1.8;
     app.stage.removeChild(standing);
@@ -126,18 +121,21 @@ export async function drawPixi(el) {
   }
 
   function onClickEnd() {
+    if(!is_telport) {
+      return
+    }    
     app.stage.removeChild(run);
     app.stage.addChild(standing);
     app.ticker.remove(moveRight)
     app.ticker.remove(moveLeft)
   }
 
-  let moveRight = ()=> {
-    container.x -= 5
+  function moveRight() {
+    container.x -= 10
   }
 
-  let moveLeft = ()=> {
-    container.x += 5
+  function moveLeft () {
+    container.x += 10
   }  
 
 
@@ -153,5 +151,28 @@ export async function drawPixi(el) {
   }
 
   window.addEventListener('resize', resizeApp);
+  let keydown = false
+  window.addEventListener('keydown', (e)=>{    
+    if(keydown) {
+      return
+    }
+    
+    if(e.key == 'ArrowRight') {
+      onClickRight()
+    }
+    if(e.key == 'ArrowLeft') {
+      onClickLeft()
+    }    
+    keydown = true
+  })
+  window.addEventListener('keyup', (e)=>{
+    keydown = false
+    if(e.key == 'ArrowRight') {
+      onClickEnd()
+    }
+    if(e.key == 'ArrowLeft') {
+      onClickEnd()
+    }    
+  })  
 
 }
