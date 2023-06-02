@@ -7,8 +7,7 @@ import backgroundImg from '@/assets/img/background/background1.png'
 
 
 export async function drawPixi(el) {
-  // el: 캔버스 엘리먼트
-  
+    
   // 가로세로 비율 유지를 위한 변수
   const heightRatio = 0.5625;
   let standardWidth = 1680
@@ -35,7 +34,7 @@ export async function drawPixi(el) {
   }
   
   // 배경 이미지
-  const texture = PIXI.Texture.from(backgroundImg);
+  const texture = await PIXI.Assets.load(backgroundImg);  
   const sprite = new PIXI.Sprite(texture);
   sprite.width = standardWidth;
   sprite.height = standardHeight;
@@ -44,7 +43,7 @@ export async function drawPixi(el) {
   // 컨테이너 및 오브젝트
   const container = new PIXI.Container();
   app.stage.addChild(container);
-  drawObject(container)
+  await drawObject(container)
   
   // 좌 우 클릭영역
   const leftArea = new PIXI.Graphics();
@@ -80,6 +79,7 @@ export async function drawPixi(el) {
   // },1000)
   
   let is_telport = true
+  
   // function startTeleport() {    
   //   teleport.y = teleport.y+50
   //   if(teleport.y > 660 ){

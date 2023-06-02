@@ -9,6 +9,7 @@ let bottomY = 675
 export const avatar = {
   async base() {
     // 아바타 스프라이트 시트 기본 생성 및 리턴 함수
+    const avatarTexture = await PIXI.Assets.load('src/assets/img/avatar/megaman.png');  
     const spritesheet = new PIXI.Spritesheet(
       PIXI.BaseTexture.from(texture),
       avatarFrameData

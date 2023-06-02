@@ -1,2 +1,6 @@
 /* @import './base.css'; */
 
+@font-face { 
+  font-family: 'DungGeunMo'; /* 폰트 패밀리 이름 주기*/ 
+  src: url('/src/assets/font/DungGeunMo//DungGeunMo.woff'); /*폰트 파일 주소*/ 
+}  

@@ -4,8 +4,8 @@ import {drawPixi} from './main'
 
 
 const el = ref()
-
 onMounted(() => {    
+  console.log('onmounted')
   drawPixi(el)
 })
 
