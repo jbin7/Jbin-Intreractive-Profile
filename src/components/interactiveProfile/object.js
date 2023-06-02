@@ -1,10 +1,11 @@
 import * as PIXI from "pixi.js";
-
+import DungGeunMo from '@/assets/font/DungGeunMo/DungGeunMo.woff'
 import blockImg from '@/assets/img/object/block2.png'
 import treeImg from '@/assets/img/object/tree.png'
 import titleImg from '@/assets/img/object/title.png'
 import wreckImg from '@/assets/img/object/wreck.png'
 import billboard1Img from '@/assets/img/object/billboard1.png'
+
 
 
 let standardWidth = 1680
@@ -15,7 +16,7 @@ let bottomY = 675
 export async function drawObject(container) {
   const ticker = PIXI.Ticker.shared;
   
-  const DungGeunMo = await PIXI.Assets.load('/src/assets/font/DungGeunMo/DungGeunMo.woff'); 
+  const font = await PIXI.Assets.load(DungGeunMo); 
   const text1 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 30, fill: '#ffffff' }));
   const text2 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 50, fill: '#ffffff' }));  
   container.addChild(text1)
