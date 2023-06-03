@@ -13,6 +13,8 @@ export async function drawObject(app) {
 
   const ticker = PIXI.Ticker.shared;
 
+  let stepCount = 0
+
   const backgroundContainer = new PIXI.Container();
   const objectContainer = new PIXI.Container();
   const avatarContainer = new PIXI.Container();
@@ -48,7 +50,7 @@ export async function drawObject(app) {
    const biography = PIXI.Sprite.from(loadObjectAssets.biography);
    const biography_description = PIXI.Sprite.from(loadObjectAssets.biography_description);
    let biography_x = 2350
-   let biography_y = 210
+   let biography_y = 170
 
    biography.width = 720
    biography.height = 540
@@ -80,7 +82,7 @@ export async function drawObject(app) {
   wreck.width = 424 * 4
   wreck.height = 96 * 4
   wreck.x = wreckX
-  wreck.y = standardHeight - wreck.height - 150
+  wreck.y = standardHeight - wreck.height - 110
   objectContainer.addChild(wreck);     
 
   // 나무
@@ -90,7 +92,7 @@ export async function drawObject(app) {
     tree.width = 42 * 3
     tree.height = 57 * 3
     tree.x = treeX;
-    tree.y = standardHeight - tree.height - 150
+    tree.y = standardHeight - tree.height - 190
     objectContainer.addChild(tree)
     treeX += tree.width
   }  
@@ -99,8 +101,8 @@ export async function drawObject(app) {
   let blockX = 0  
   for(let i = 0 ; i < 100 ; i ++) {
     const block = PIXI.Sprite.from(loadObjectAssets.block);    
-    block.width = 127 *2
-    block.height = 78 *2   
+    block.width = 127 *2.5
+    block.height = 78 *2.5 
     block.x = blockX;
     block.y = standardHeight - block.height
     objectContainer.addChild(block)
@@ -130,8 +132,6 @@ export async function drawObject(app) {
   //     is_telport = true
   //   },600)
   // }  
-
-  let stepCount = 0
 
   // 좌 우 클릭영역
   const leftArea = new PIXI.Graphics();
@@ -192,6 +192,9 @@ export async function drawObject(app) {
   }
 
   function moveLeft () {
+    if (stepCount < 1) {
+      return
+    }
     objectContainer.x += 10
     stepCount -= 10
   }  

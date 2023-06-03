@@ -3,7 +3,7 @@ import * as PIXI from "pixi.js";
 let standardWidth = 1680
 let standardHeight = 900
 
-let bottomY = 675
+let bottomY = 635
 
 export const avatar = {
   async base() {
@@ -18,7 +18,7 @@ export const avatar = {
     );
     await spritesheet.parse();    
 
-    
+
     return spritesheet
   },
   actinos: {

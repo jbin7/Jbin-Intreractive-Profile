@@ -29,7 +29,6 @@ export async function drawPixi(el) {
     app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';        
   }  
 
-  await loadAssets()
 
   const graphics = new PIXI.Graphics();
 
@@ -39,6 +38,32 @@ export async function drawPixi(el) {
   graphics.endFill();
 
   app.stage.addChild(graphics);
+
+  const style = new PIXI.TextStyle({
+    fontFamily: 'Arial',
+    fontSize: 36,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    fill: ['#ffffff', '#00ff99'], // gradient
+    stroke: '#4a1850',
+    strokeThickness: 5,
+    dropShadow: true,
+    dropShadowColor: '#000000',
+    dropShadowBlur: 4,
+    dropShadowAngle: Math.PI / 6,
+    dropShadowDistance: 6,
+    wordWrap: true,
+    wordWrapWidth: 440,
+    lineJoin: 'round',
+  });
+
+  const loadingText = new PIXI.Text('loading..', style);
+  loadingText.x = standardWidth/2 - loadingText.width;
+  loadingText.y = 400;
+  
+  app.stage.addChild(loadingText);
+  
+  await loadAssets()
 
   await drawObject(app)
 
