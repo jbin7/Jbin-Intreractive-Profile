@@ -30,9 +30,19 @@ export async function drawPixi(el) {
   }  
 
   await loadAssets()
-  
+
+  const graphics = new PIXI.Graphics();
+
+  // Rectangle
+  graphics.beginFill(0x1a5289);
+  graphics.drawRect(0, 0, standardWidth, standardHeight);
+  graphics.endFill();
+
+  app.stage.addChild(graphics);
+
   await drawObject(app)
 
+  
 
   // 애플리케이션 리사이징
   function resizeApp() {    

@@ -43,7 +43,15 @@ const manifestExample = {
           {
             name: 'billboard1',
             srcs: '/assets/img/object/billboard1.png',
-          },                        
+          },    
+          {
+            name: 'biography',
+            srcs: '/assets/img/object/biography.png',
+          },      
+          {
+            name: 'biography_description',
+            srcs: '/assets/img/object/biography_description.png',
+          },                                       
       ],
   },
   {

@@ -7,9 +7,9 @@ let standardHeight = 900
 
 export async function drawObject(app) {
   
-  const loadAvatarAssets = await PIXI.Assets.loadBundle('load-object');   
+  const loadObjectAssets = await PIXI.Assets.loadBundle('load-object');     
   const loadBackgroundAssets = await PIXI.Assets.loadBundle('load-background');
-  const loadFontAssets = await PIXI.Assets.loadBundle('load-font');      
+  // const loadFontAssets = await PIXI.Assets.loadBundle('load-font');    bld  
 
   const ticker = PIXI.Ticker.shared;
 
@@ -20,12 +20,6 @@ export async function drawObject(app) {
   app.stage.addChild(objectContainer);
   app.stage.addChild(avatarContainer);
   
-  
-  const text1 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 30, fill: '#ffffff' }));
-  const text2 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 50, fill: '#ffffff' }));  
-  objectContainer.addChild(text1)
-  text2.y = 30
-  objectContainer.addChild(text2)
 
   // 배경 이미지  
   const sprite = new PIXI.Sprite(loadBackgroundAssets.background);
@@ -35,7 +29,7 @@ export async function drawObject(app) {
   
 
   // 타이틀
-  const title = PIXI.Sprite.from(loadAvatarAssets.title);
+  const title = PIXI.Sprite.from(loadObjectAssets.title);
   title.width = 600
   title.height = 350
   title.x = 550
@@ -50,26 +44,49 @@ export async function drawObject(app) {
     }
   }
 
-   // 전광판 1   
-   const billboard = PIXI.Sprite.from(loadAvatarAssets.billboard1);
-   billboard.width = 240 * 3.5
-   billboard.height = 180 * 3.5
-   billboard.x = 500
-   billboard.y = standardHeight - billboard.height - 150
-  //  objectContainer.addChild(billboard);    
+   // 바이오그래피     
+   const biography = PIXI.Sprite.from(loadObjectAssets.biography);
+   const biography_description = PIXI.Sprite.from(loadObjectAssets.biography_description);
+   let biography_x = 2350
+   let biography_y = 210
 
-  // 
-  const wreck = PIXI.Sprite.from(loadAvatarAssets.wreck);
+   biography.width = 720
+   biography.height = 540
+   biography.x = biography_x
+   biography.y = biography_y
+
+   biography.width = 720
+   biography.height = 540
+   biography_description.x = biography_x
+   biography_description.y = biography_y   
+   biography_description.alpha = 0 
+
+   objectContainer.addChild(biography);    
+   objectContainer.addChild(biography_description);  
+   
+   ticker.add(showBio)
+   function showBio(){
+    if(stepCount > 1200) {
+      biography_description.alpha += 0.02
+    }    
+    if (biography_description.alpha > 1) {
+      ticker.remove(showBio)
+    }
+   }   
+
+  // wreck
+  const wreck = PIXI.Sprite.from(loadObjectAssets.wreck);
+  let wreckX = 2000
   wreck.width = 424 * 4
   wreck.height = 96 * 4
-  wreck.x = 2000
+  wreck.x = wreckX
   wreck.y = standardHeight - wreck.height - 150
   objectContainer.addChild(wreck);     
 
   // 나무
   let treeX = 0
   for(let i = 0 ; i < 100 ; i ++) {
-    const tree = PIXI.Sprite.from(loadAvatarAssets.tree);
+    const tree = PIXI.Sprite.from(loadObjectAssets.tree);
     tree.width = 42 * 3
     tree.height = 57 * 3
     tree.x = treeX;
@@ -81,7 +98,7 @@ export async function drawObject(app) {
   // 바닥 블록
   let blockX = 0  
   for(let i = 0 ; i < 100 ; i ++) {
-    const block = PIXI.Sprite.from(loadAvatarAssets.block);    
+    const block = PIXI.Sprite.from(loadObjectAssets.block);    
     block.width = 127 *2
     block.height = 78 *2   
     block.x = blockX;
@@ -96,28 +113,25 @@ export async function drawObject(app) {
   let run = await avatar.actinos.run()
   let teleport = await avatar.actinos.teleport()
   let appear = await avatar.actinos.appear() 
-  avatarContainer.addChild(teleport);
-
-  window.setTimeout(()=>{
-    ticker.add(startTeleport)
-  },1000)
+  avatarContainer.addChild(standing);
   
-  let is_telport = false
-  
-  function startTeleport() {    
-    teleport.y = teleport.y+50
-    if(teleport.y > 660 ){
-      ticker.remove(startTeleport)
-      avatarContainer.removeChild(teleport)
-      avatarContainer.addChild(appear);      
-    }
-    window.setTimeout(()=> {
-      avatarContainer.removeChild(appear)
-      avatarContainer.addChild(standing);
-      is_telport = true
-    },600)
-  }  
+  let is_telport = true
+  // ticker.add(startTeleport)
+  // function startTeleport() {    
+  //   teleport.y = teleport.y+50
+  //   if(teleport.y > 660 ){
+  //     ticker.remove(startTeleport)
+  //     avatarContainer.removeChild(teleport)
+  //     avatarContainer.addChild(appear);      
+  //   }
+  //   window.setTimeout(()=> {
+  //     avatarContainer.removeChild(appear)
+  //     avatarContainer.addChild(standing);
+  //     is_telport = true
+  //   },600)
+  // }  
 
+  let stepCount = 0
 
   // 좌 우 클릭영역
   const leftArea = new PIXI.Graphics();
@@ -172,12 +186,14 @@ export async function drawObject(app) {
     ticker.remove(moveLeft)
   }
 
-  function moveRight() {
+  function moveRight() {    
     objectContainer.x -= 10
+    stepCount += 10
   }
 
   function moveLeft () {
     objectContainer.x += 10
+    stepCount -= 10
   }  
 
   let keydown = false
