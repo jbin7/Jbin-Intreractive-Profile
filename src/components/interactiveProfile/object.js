@@ -14,19 +14,20 @@ export async function drawObject(app) {
   const ticker = PIXI.Ticker.shared;
 
   const backgroundContainer = new PIXI.Container();
-  const container = new PIXI.Container();
+  const objectContainer = new PIXI.Container();
+  const avatarContainer = new PIXI.Container();
   app.stage.addChild(backgroundContainer);
-  app.stage.addChild(container);
+  app.stage.addChild(objectContainer);
+  app.stage.addChild(avatarContainer);
   
   
   const text1 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 30, fill: '#ffffff' }));
   const text2 = new PIXI.Text('테스트 안녕하세요 Hi Everyone', new PIXI.TextStyle({ fontFamily: 'DungGeunMo', fontSize: 50, fill: '#ffffff' }));  
-  container.addChild(text1)
+  objectContainer.addChild(text1)
   text2.y = 30
-  container.addChild(text2)
+  objectContainer.addChild(text2)
 
   // 배경 이미지  
-  
   const sprite = new PIXI.Sprite(loadBackgroundAssets.background);
   sprite.width = standardWidth;
   sprite.height = standardHeight;
@@ -39,7 +40,7 @@ export async function drawObject(app) {
   title.height = 350
   title.x = 550
   title.y = 150
-  container.addChild(title)
+  objectContainer.addChild(title)
   title.alpha = 0 
   ticker.add(showTitle)
   function showTitle(){
@@ -55,7 +56,7 @@ export async function drawObject(app) {
    billboard.height = 180 * 3.5
    billboard.x = 500
    billboard.y = standardHeight - billboard.height - 150
-   container.addChild(billboard);    
+  //  objectContainer.addChild(billboard);    
 
   // 
   const wreck = PIXI.Sprite.from(loadAvatarAssets.wreck);
@@ -63,7 +64,7 @@ export async function drawObject(app) {
   wreck.height = 96 * 4
   wreck.x = 2000
   wreck.y = standardHeight - wreck.height - 150
-  container.addChild(wreck);     
+  objectContainer.addChild(wreck);     
 
   // 나무
   let treeX = 0
@@ -73,7 +74,7 @@ export async function drawObject(app) {
     tree.height = 57 * 3
     tree.x = treeX;
     tree.y = standardHeight - tree.height - 150
-    container.addChild(tree)
+    objectContainer.addChild(tree)
     treeX += tree.width
   }  
 
@@ -85,7 +86,7 @@ export async function drawObject(app) {
     block.height = 78 *2   
     block.x = blockX;
     block.y = standardHeight - block.height
-    container.addChild(block)
+    objectContainer.addChild(block)
     blockX += block.width
   }  
 
@@ -95,27 +96,27 @@ export async function drawObject(app) {
   let run = await avatar.actinos.run()
   let teleport = await avatar.actinos.teleport()
   let appear = await avatar.actinos.appear() 
-  app.stage.addChild(standing);
+  avatarContainer.addChild(teleport);
 
-  // window.setTimeout(()=>{
-  //   app.ticker.add(startTeleport)
-  // },1000)
+  window.setTimeout(()=>{
+    ticker.add(startTeleport)
+  },1000)
   
-  let is_telport = true
+  let is_telport = false
   
-  // function startTeleport() {    
-  //   teleport.y = teleport.y+50
-  //   if(teleport.y > 660 ){
-  //     app.ticker.remove(startTeleport)
-  //     app.stage.removeChild(teleport)
-  //     app.stage.addChild(appear);      
-  //   }
-  //   window.setTimeout(()=> {
-  //     app.stage.removeChild(appear)
-  //     app.stage.addChild(standing);
-  //     is_telport = true
-  //   },600)
-  // }  
+  function startTeleport() {    
+    teleport.y = teleport.y+50
+    if(teleport.y > 660 ){
+      ticker.remove(startTeleport)
+      avatarContainer.removeChild(teleport)
+      avatarContainer.addChild(appear);      
+    }
+    window.setTimeout(()=> {
+      avatarContainer.removeChild(appear)
+      avatarContainer.addChild(standing);
+      is_telport = true
+    },600)
+  }  
 
 
   // 좌 우 클릭영역
@@ -128,7 +129,7 @@ export async function drawObject(app) {
   leftArea.on('pointerdown', onClickLeft);
   leftArea.on('pointerup', onClickEnd);
   leftArea.cursor = 'pointer';
-  container.addChild(leftArea);
+  avatarContainer.addChild(leftArea);
 
 
   rightArea.beginFill(0, 0.01);
@@ -137,7 +138,7 @@ export async function drawObject(app) {
   rightArea.on('pointerdown', onClickRight);
   rightArea.on('pointerup', onClickEnd);
   rightArea.cursor = 'pointer';
-  container.addChild(rightArea);    
+  avatarContainer.addChild(rightArea);    
 
   function onClickRight() {
     if(!is_telport) {
@@ -145,9 +146,9 @@ export async function drawObject(app) {
     }
     standing.scale.x= 1.8;
     run.scale.x= 1.8;
-    app.stage.removeChild(standing);
-    app.stage.addChild(run);
-    app.ticker.add(moveRight);    
+    avatarContainer.removeChild(standing);
+    avatarContainer.addChild(run);
+    ticker.add(moveRight);    
   }
 
   function onClickLeft() {
@@ -156,27 +157,27 @@ export async function drawObject(app) {
     }    
     standing.scale.x=-1.8;
     run.scale.x=-1.8;
-    app.stage.removeChild(standing);
-    app.stage.addChild(run);    
-    app.ticker.add(moveLeft);    
+    avatarContainer.removeChild(standing);
+    avatarContainer.addChild(run);    
+    ticker.add(moveLeft);    
   }
 
   function onClickEnd() {
     if(!is_telport) {
       return
     }    
-    app.stage.removeChild(run);
-    app.stage.addChild(standing);
-    app.ticker.remove(moveRight)
-    app.ticker.remove(moveLeft)
+    avatarContainer.removeChild(run);
+    avatarContainer.addChild(standing);
+    ticker.remove(moveRight)
+    ticker.remove(moveLeft)
   }
 
   function moveRight() {
-    container.x -= 10
+    objectContainer.x -= 10
   }
 
   function moveLeft () {
-    container.x += 10
+    objectContainer.x += 10
   }  
 
   let keydown = false

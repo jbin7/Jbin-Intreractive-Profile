@@ -6,8 +6,6 @@ import { drawObject } from "./object";
 
 export async function drawPixi(el) {  
   
-  await loadAssets()  
-  
   // 가로세로 비율 유지를 위한 변수
   const heightRatio = 0.5625;
   let standardWidth = 1680
@@ -23,6 +21,7 @@ export async function drawPixi(el) {
     eventMode: 'dynamic'
   });
   el.value.appendChild(app.view);
+  
 
   // 현재 디스플레이 사이즈와 다를경우 화면 리사이징
   if(el.value.clientWidth < standardWidth) {
@@ -30,6 +29,8 @@ export async function drawPixi(el) {
     app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';        
   }  
 
+  await loadAssets()
+  
   await drawObject(app)
 
 
