@@ -8,13 +8,17 @@ let bottomY = 675
 export const avatar = {
   async base() {
     // 아바타 스프라이트 시트 기본 생성 및 리턴 함수    
+     
     const loadAvatarAssets = await PIXI.Assets.loadBundle('load-avatar');    
+    // const spritesheet = await PIXI.Assets.load(avatarFrameData);
+    
     const spritesheet = new PIXI.Spritesheet(
       loadAvatarAssets.avatar,
       avatarFrameData
     );
-  
-    await spritesheet.parse();
+    await spritesheet.parse();    
+
+    
     return spritesheet
   },
   actinos: {
@@ -137,7 +141,7 @@ export const avatarFrameData = {
 
 	},
 	meta: {
-		image: 'images/spritesheet.png',
+		image: '/assets/img/avatar/megaman.png',
 		format: 'RGBA8888',
 		size: { w: 972, h: 341 },
 		scale: 1

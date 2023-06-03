@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import {drawPixi} from './main'
+import {drawPixi} from './interactiveProfile/main'
 
 
 const el = ref()

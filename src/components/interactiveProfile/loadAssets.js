@@ -59,7 +59,7 @@ const manifestExample = {
     assets: [
         {
             name: 'dungGeunMo',
-            srcs: '/assets/font/DungGeunMo.woff',
+            srcs: '/assets/font/DungGeunMo/DungGeunMo.woff',
         },
     ],
   }],
