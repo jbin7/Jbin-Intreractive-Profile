@@ -73,11 +73,12 @@ export async function drawPixi(el) {
 
     if(el.value.clientWidth !== null && el.value.clientHeight !== null) {
       console.log('asdsd')
-      let currentRatio = window.innerHeight/window.innerWidth 
+      
       let ratio_1 = 0.5625
       let ratio_2 = 0.75      
       let clientWidth = el.value.clientWidth
       let clientHeight = el.value.clientHeight
+      let currentRatio = clientHeight/clientWidth
 
       if(currentRatio > ratio_1) {
         const targetWidth = standardWidth;
@@ -92,6 +93,8 @@ export async function drawPixi(el) {
         app.view.style.height = clientHeight + 'px';
       }    
     }else {
+      currentRatio = window.innerHeight/window.innerWidth 
+
       if(currentRatio > ratio_1) {
         const targetWidth = standardWidth;
         const targetHeight = standardHeight

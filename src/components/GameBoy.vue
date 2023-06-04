@@ -30,7 +30,7 @@ function onMouseUp() {
   <div class="gameboy" id="GameBoy">    
     <div class="screen-area">
       
-      <div class="power">
+      <!-- <div class="power">
         <div class="indicator">
           <div class="led"></div>
           <span class="arc" style="z-index:2"></span>
@@ -38,7 +38,7 @@ function onMouseUp() {
           <span class="arc" style="z-index:0"></span>
         </div>
         POWER
-      </div>
+      </div> -->
       
       <!-- <canvas class="display" id="mainCanvas"></canvas> -->
       <div class="display">
@@ -63,11 +63,11 @@ function onMouseUp() {
     <div class="controls">
       <div class="dpad">
         <div class="up"><i class="fa fa-caret-up"></i></div>
-        <div class="right" @mousedown="onClickRight" @mouseup="onMouseUp">
+        <div class="right" @mousedown="onClickRight" @mouseup="onMouseUp" @touchstart="onClickRight" @touchend="onMouseUp" >
           <i class="fa fa-caret-right"></i>
         </div>
         <div class="down"><i class="fa fa-caret-down"></i></div>
-        <div class="left" @mousedown="onClickLeft" @mouseup="onMouseUp">
+        <div class="left" @mousedown="onClickLeft" @mouseup="onMouseUp" @touchstart="onClickLeft" @touchend="onMouseUp">
           <i class="fa fa-caret-left"></i>
         </div>
         <div class="middle"></div>
@@ -163,7 +163,7 @@ function onMouseUp() {
 <style scoped lang="scss">
 .gameboy {
   position:relative;
-  width:350px;
+  width:380px;
   height:570px;
   border-radius:20px;
   padding:20px;
@@ -202,7 +202,7 @@ function onMouseUp() {
   
   .screen-area {
     position:relative;
-    padding:35px 50px 5px 50px;
+    padding:15px 10px 5px 10px;
     border-radius:15px 15px 15px 15px;
     background-color:#23252d;
     color:#67879a;
@@ -277,8 +277,8 @@ function onMouseUp() {
     
     .display {
       background-color:#929d97;
-      height:190px;
-      width:210px;
+      height:250px;
+      width:320px;
       border-radius:3px;
       margin-bottom:15px;
     }
