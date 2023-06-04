@@ -70,30 +70,41 @@ export async function drawPixi(el) {
 
   // 애플리케이션 리사이징
   function resizeApp() {  
-    let currentRatio = window.innerHeight/window.innerWidth 
-    let ratio_1 = 0.5625
-    let ratio_2 = 0.75
 
-    if(currentRatio > ratio_1) {
-      const targetWidth = standardWidth;
-      const targetHeight = standardHeight
-      app.renderer.resize(targetWidth, targetHeight);   
-      app.view.style.objectFit = 'cover';
-      app.view.style.width = window.innerWidth + 'px';
-      app.view.style.height = window.innerHeight + 'px';               
+    if(el.value.clientWidth !== null && el.value.clientHeight !== null) {
+      console.log('asdsd')
+      let currentRatio = window.innerHeight/window.innerWidth 
+      let ratio_1 = 0.5625
+      let ratio_2 = 0.75      
+      let clientWidth = el.value.clientWidth
+      let clientHeight = el.value.clientHeight
+
+      if(currentRatio > ratio_1) {
+        const targetWidth = standardWidth;
+        const targetHeight = standardHeight
+        app.renderer.resize(targetWidth, targetHeight);   
+        app.view.style.objectFit = 'cover';
+        app.view.style.width = clientWidth + 'px';
+        app.view.style.height = clientHeight + 'px';               
+      }else {
+        app.view.style.objectFit = 'contain';
+        app.view.style.width = clientWidth + 'px';
+        app.view.style.height = clientHeight + 'px';
+      }    
     }else {
-      app.view.style.objectFit = 'contain';
-      app.view.style.width = window.innerWidth + 'px';
-      app.view.style.height = window.innerHeight + 'px';
+      if(currentRatio > ratio_1) {
+        const targetWidth = standardWidth;
+        const targetHeight = standardHeight
+        app.renderer.resize(targetWidth, targetHeight);   
+        app.view.style.objectFit = 'cover';
+        app.view.style.width = window.innerWidth + 'px';
+        app.view.style.height = window.innerHeight + 'px';               
+      }else {
+        app.view.style.objectFit = 'contain';
+        app.view.style.width = window.innerWidth + 'px';
+        app.view.style.height = window.innerHeight + 'px';
+      }
     }
-
-    if(el.value.clientWidth !== null) {
-      // app.renderer.resize(el.value.clientWidth, el.value.clientWidth*heightRatio);    
-      // app.view.style.width = el.value.clientWidth + 'px';
-      // app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';         
-    }    
-      // app.view.style.width = window.innerWidth + 'px';
-      // app.view.style.height = window.innerHeight + 'px';        
   }
 
   window.addEventListener('resize', resizeApp);
