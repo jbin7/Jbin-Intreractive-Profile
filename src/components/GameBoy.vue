@@ -45,36 +45,44 @@ function onMouseUp() {
         <game-display/>        
       </div>
       
-      <div class="label">
-        <div class="title">GAME BOY</div>
-        <div class="subtitle">
-          <span class="c">C</span><!--
-      --><span class="o1">O</span><!--
-      --><span class="l">L</span><!--
-      --><span class="o2">O</span><!--
-      --><span class="r">R</span>
-        </div>
-      </div>
+
       
     </div>
     
-    <div class="nintendo">Nintendo</div>
-    
+    <!-- <div class="nintendo">Nintendo</div> -->
+    <div class="label">
+        <div class="brand">nintendo</div>
+        <div class="title">GAME BOY</div>
+        <div class="subtitle">
+          <!-- 
+          <span class="c">C</span>
+          <span class="o1">O</span>
+          <span class="l">L</span>
+          <span class="o2">O</span>
+          <span class="r">R</span> 
+          -->
+        </div>
+      </div>
+
     <div class="controls">
       <div class="dpad">
-        <div class="up"><i class="fa fa-caret-up"></i></div>
+        <div class="up" @mousedown="onClickRight" @mouseup="onMouseUp" @touchstart="onClickRight" @touchend="onMouseUp">
+          <i class="fa fa-caret-up"></i>
+        </div>
         <div class="right" @mousedown="onClickRight" @mouseup="onMouseUp" @touchstart="onClickRight" @touchend="onMouseUp" >
           <i class="fa fa-caret-right"></i>
         </div>
-        <div class="down"><i class="fa fa-caret-down"></i></div>
+        <div class="down" @mousedown="onClickLeft" @mouseup="onMouseUp" @touchstart="onClickLeft" @touchend="onMouseUp">
+          <i class="fa fa-caret-down"></i>
+        </div>
         <div class="left" @mousedown="onClickLeft" @mouseup="onMouseUp" @touchstart="onClickLeft" @touchend="onMouseUp">
           <i class="fa fa-caret-left"></i>
         </div>
         <div class="middle"></div>
       </div>
       <div class="a-b">
-        <div class="b">B</div>
-        <div class="a">A</div>
+        <div class="b"></div>
+        <div class="a"></div>
       </div>
     </div>
     
@@ -83,7 +91,7 @@ function onMouseUp() {
       <div class="start">START</div>
     </div>
     
-    <div class="speaker">
+    <!-- <div class="speaker">
       <div class="dot placeholder"></div>
       <div class="dot open"></div>
       <div class="dot closed"></div>
@@ -155,7 +163,7 @@ function onMouseUp() {
       <div class="dot closed"></div>
       <div class="dot open"></div>
       <div class="dot placeholder"></div>
-    </div>
+    </div> -->
     
   </div>
 </template>
@@ -164,11 +172,11 @@ function onMouseUp() {
 .gameboy {
   position:relative;
   width:380px;
-  height:570px;
+  height:700px;
   border-radius:20px;
-  padding:20px;
-  background-color:#4f50db;
-  box-shadow:0px -5px 0px #0d0e51, 0px 5px 0px #3d38b5;
+  padding:10px;
+  background-color:#acacac;
+  // box-shadow:0px -5px 0px #0d0e51, 0px 5px 0px #3d38b5;
   font-family:sans-serif;
   -webkit-user-select:none;
   cursor:default;
@@ -195,17 +203,17 @@ function onMouseUp() {
     width:calc(100% - 10px);
     height:50px;
     border-radius:50%;
-    background-color:#4f50db;
-    box-shadow:0px 5px 0px #3d38b5;
-    border-bottom:2px solid #9998eb;
+    background-color:#acacac;
+    // box-shadow:0px 5px 0px #3d38b5;
+    // border-bottom:2px solid #9998eb;
   }
   
   .screen-area {
     position:relative;
     padding:15px 10px 5px 10px;
     border-radius:15px 15px 15px 15px;
-    background-color:#23252d;
-    color:#67879a;
+    background-color:#767189;
+    color:#302058;
     box-shadow:0px 2px 0px black, 0px -2px 0px black, -2px 0px 0px black, 2px 0px 0px black;
     
     &::after {
@@ -214,10 +222,10 @@ function onMouseUp() {
       position:absolute;
       top:calc(100% - 20px);
       left:5px;
-      width:calc(100% - 10px);
+      // width:calc(100% - 10px);
       height:30px;
       border-radius:50%;
-      background-color:#23252d;
+      background-color:#767189;
       box-shadow:0px 2px 0px black;
     }
     
@@ -277,17 +285,27 @@ function onMouseUp() {
     
     .display {
       background-color:#929d97;
-      height:250px;
-      width:320px;
+      height:440px;
+      width:340px;
       border-radius:3px;
       margin-bottom:15px;
     }
     
+
+  }
+
     .label {
       position:relative;
-      text-align:center;
+      text-align:left;
       font-size:20px;
+      margin-top:10px;
       z-index:5;
+
+      .brand {
+        margin-left: 20px;
+        display:inline;
+        font-size: 16px;
+      }
       
       .title {
         display:inline;
@@ -323,8 +341,7 @@ function onMouseUp() {
           color:#317aaf;
         }
       }
-    }
-  }
+    }  
   
   .nintendo {
     padding:0px 5px;
@@ -341,21 +358,22 @@ function onMouseUp() {
   }
   
   .controls {
+    margin-top: 20px;
     display:flex;
     justify-content:space-between;
     
     .dpad {
       position:relative;
       display:inline-block;
-      width:90px;
-      height:90px;
+      width:120px;
+      height:120px;
       z-index:5;
       
       > * {
         width:33%;
         height:33%;
         position:absolute;
-        background-color:#565e6a;
+        background-color:#1c1f25;
         cursor:pointer;
         
         i {
@@ -481,10 +499,10 @@ function onMouseUp() {
         height:40px;
         line-height: 40px;
         border-radius:50%;
-        background-color:#2c313e;
+        background-color: #6f001a;
         border-bottom:2px solid #888;
         box-shadow:-1px 1px 5px black, 0px 0px 5px black inset;
-        text-shadow:0px -1px 1px #888;
+        // text-shadow:0px -1px 1px #888;
         color:#2c313e;
         text-align:center;
         -webkit-user-select:none;
@@ -509,15 +527,18 @@ function onMouseUp() {
   }
 
   .start-select {
+    position: relative;
+    top:-100px;
     width:100%;
     height:60px;
     display:flex;
     justify-content:center;
     
     .select, .start {
+      transform:rotateZ(-20deg);
       display:inline-block;
-      color:#6b67ed;
-      text-shadow:0px -1px 0px #3436bf;
+      color:#000006;
+      // text-shadow:0px -1px 0px #3436bf;
       letter-spacing:-1px;
       width:60px;
       font-size:16px;
@@ -535,7 +556,7 @@ function onMouseUp() {
         background:linear-gradient(to bottom, #0b0a1c 0%, #0b0a1c 30%, #62636c 70%, #62636c 100%);
         background-repeat:no-repeat;
         border:2px solid #0b0a1c;
-        box-shadow:0px -2px 1px #8482e9;
+        // box-shadow:0px -2px 1px #8482e9;
         cursor:pointer;
       }
       &:active::before {
