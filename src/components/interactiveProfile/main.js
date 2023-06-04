@@ -12,6 +12,7 @@ export async function drawPixi(el) {
   let standardHeight = 900
   // el.value.clientWidth
 
+
   // 픽시 애플리케이션 생성
   const app = new PIXI.Application({     
     width: standardWidth,
@@ -20,13 +21,11 @@ export async function drawPixi(el) {
     autoDensity: true,
     eventMode: 'dynamic'
   });
-  el.value.appendChild(app.view);
-  
+  el.value.appendChild(app.view);   
 
   // 현재 디스플레이 사이즈와 다를경우 화면 리사이징
   if(el.value.clientWidth < standardWidth) {
-    app.view.style.width = el.value.clientWidth + 'px';
-    app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';        
+    resizeApp()    
   }  
 
 
@@ -70,12 +69,31 @@ export async function drawPixi(el) {
   
 
   // 애플리케이션 리사이징
-  function resizeApp() {    
+  function resizeApp() {  
+    let currentRatio = window.innerHeight/window.innerWidth 
+    let ratio_1 = 0.5625
+    let ratio_2 = 0.75
+
+    if(currentRatio > ratio_1) {
+      const targetWidth = standardWidth;
+      const targetHeight = standardHeight
+      app.renderer.resize(targetWidth, targetHeight);   
+      app.view.style.objectFit = 'cover';
+      app.view.style.width = window.innerWidth + 'px';
+      app.view.style.height = window.innerHeight + 'px';               
+    }else {
+      app.view.style.objectFit = 'contain';
+      app.view.style.width = window.innerWidth + 'px';
+      app.view.style.height = window.innerHeight + 'px';
+    }
+
     if(el.value.clientWidth !== null) {
       // app.renderer.resize(el.value.clientWidth, el.value.clientWidth*heightRatio);    
-      app.view.style.width = el.value.clientWidth + 'px';
-      app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';         
+      // app.view.style.width = el.value.clientWidth + 'px';
+      // app.view.style.height = (el.value.clientWidth * heightRatio) + 'px';         
     }    
+      // app.view.style.width = window.innerWidth + 'px';
+      // app.view.style.height = window.innerHeight + 'px';        
   }
 
   window.addEventListener('resize', resizeApp);

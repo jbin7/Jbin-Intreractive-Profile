@@ -2,10 +2,12 @@ import * as PIXI from "pixi.js";
 import { avatar } from "./avatar";
 
 
-let standardWidth = 1680
-let standardHeight = 900
+
 
 export async function drawObject(app) {
+
+  let standardWidth = app.stage.width
+  let standardHeight = app.stage.height  
   
   const loadObjectAssets = await PIXI.Assets.loadBundle('load-object');     
   const loadBackgroundAssets = await PIXI.Assets.loadBundle('load-background');
@@ -21,7 +23,7 @@ export async function drawObject(app) {
   app.stage.addChild(backgroundContainer);
   app.stage.addChild(objectContainer);
   app.stage.addChild(avatarContainer);
-  
+   
 
   // 배경 이미지  
   const sprite = new PIXI.Sprite(loadBackgroundAssets.background);
@@ -68,13 +70,44 @@ export async function drawObject(app) {
    
    ticker.add(showBio)
    function showBio(){
-    if(stepCount > 1200) {
+    if(stepCount > 120) {
       biography_description.alpha += 0.02
     }    
     if (biography_description.alpha > 1) {
       ticker.remove(showBio)
     }
    }   
+
+
+   // 어빌리티     
+   const ability = PIXI.Sprite.from(loadObjectAssets.ability);
+   const ability_description = PIXI.Sprite.from(loadObjectAssets.ability_description);
+   let ability_x = 3600
+   let ability_y = 170
+
+   ability.width = 720
+   ability.height = 540
+   ability.x = ability_x
+   ability.y = ability_y
+
+   ability.width = 720
+   ability.height = 540
+   ability_description.x = ability_x
+   ability_description.y = ability_y   
+   ability_description.alpha = 0
+
+   objectContainer.addChild(ability);    
+   objectContainer.addChild(ability_description);  
+   
+   ticker.add(showability)
+   function showability(){
+    if(stepCount > 240) {
+      ability_description.alpha += 0.02
+    }    
+    if (ability_description.alpha > 1) {
+      ticker.remove(showability)
+    }
+   }      
 
   // wreck
   const wreck = PIXI.Sprite.from(loadObjectAssets.wreck);
@@ -188,7 +221,7 @@ export async function drawObject(app) {
 
   function moveRight() {    
     objectContainer.x -= 10
-    stepCount += 10
+    stepCount += 1      
   }
 
   function moveLeft () {
@@ -196,7 +229,7 @@ export async function drawObject(app) {
       return
     }
     objectContainer.x += 10
-    stepCount -= 10
+    stepCount -= 1
   }  
 
   let keydown = false
