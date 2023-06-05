@@ -70,8 +70,8 @@ export async function drawObject(app) {
    
    ticker.add(showBio)
    function showBio(){
-    if(stepCount > 120) {
-      biography_description.alpha += 0.02
+    if(stepCount > 140) {
+      biography_description.alpha += 0.015
     }    
     if (biography_description.alpha > 1) {
       ticker.remove(showBio)
@@ -101,8 +101,8 @@ export async function drawObject(app) {
    
    ticker.add(showability)
    function showability(){
-    if(stepCount > 240) {
-      ability_description.alpha += 0.02
+    if(stepCount > 260) {
+      ability_description.alpha += 0.015
     }    
     if (ability_description.alpha > 1) {
       ticker.remove(showability)

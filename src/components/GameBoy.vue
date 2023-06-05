@@ -358,15 +358,15 @@ function onMouseUp() {
   }
   
   .controls {
-    margin-top: 20px;
+    margin-top:10px;
     display:flex;
     justify-content:space-between;
     
     .dpad {
       position:relative;
       display:inline-block;
-      width:120px;
-      height:120px;
+      width:140px;
+      height:140px;
       z-index:5;
       
       > * {
@@ -490,6 +490,7 @@ function onMouseUp() {
       display:inline-block;
       width:120px;
       height:90px;
+      z-index:5;
       
       .a, .b {
         position:absolute;
@@ -528,7 +529,9 @@ function onMouseUp() {
 
   .start-select {
     position: relative;
-    top:-100px;
+    top:-80px;
+    left: 20px;
+    z-index: 4;
     width:100%;
     height:60px;
     display:flex;
@@ -540,10 +543,10 @@ function onMouseUp() {
       color:#000006;
       // text-shadow:0px -1px 0px #3436bf;
       letter-spacing:-1px;
-      width:60px;
-      font-size:16px;
+      width:50px;
+      font-size:12px;
       text-align:center;
-      margin-top:60px;
+      margin-top:50px;
       
       &::before {
         content:'';
