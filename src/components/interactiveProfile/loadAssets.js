@@ -41,10 +41,6 @@ const manifestExample = {
             srcs: '/assets/img/object/wreck.png',
           },    
           {
-            name: 'billboard1',
-            srcs: '/assets/img/object/billboard1.png',
-          },    
-          {
             name: 'biography',
             srcs: '/assets/img/object/biography.png',
           },      
@@ -59,7 +55,23 @@ const manifestExample = {
           {
             name: 'ability_description',
             srcs: '/assets/img/object/ability_description.png',
-          },                                             
+          },
+          {
+            name: 'language',
+            srcs: '/assets/img/object/language.png',
+          },
+          {
+            name: 'frontend',
+            srcs: '/assets/img/object/frontend.png',
+          },
+          {
+            name: 'backend',
+            srcs: '/assets/img/object/backend.png',
+          },
+          {
+            name: 'tool',
+            srcs: '/assets/img/object/tool.png',
+          },                                        
       ],
   },
   {

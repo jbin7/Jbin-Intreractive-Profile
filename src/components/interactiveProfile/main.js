@@ -57,8 +57,9 @@ export async function drawPixi(el) {
   });
 
   const loadingText = new PIXI.Text('loading..', style);
-  loadingText.x = standardWidth/2 - loadingText.width;
-  loadingText.y = 400;
+  loadingText.anchor.set(0.5, 0.5)
+  loadingText.x = standardWidth/2
+  loadingText.y = standardHeight/2
   
   app.stage.addChild(loadingText);
   
@@ -71,8 +72,7 @@ export async function drawPixi(el) {
   // 애플리케이션 리사이징
   function resizeApp() {  
 
-    if(el.value.clientWidth !== null && el.value.clientHeight !== null) {
-      console.log('asdsd')
+    if(el.value.clientWidth !== null && el.value.clientHeight !== null) {      
       
       let ratio_1 = 0.5625
       let ratio_2 = 0.75      
