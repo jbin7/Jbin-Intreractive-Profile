@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import { avatar } from "./avatar";
+import { Megaman, Elric } from "./avatar";
 
 
 
@@ -240,28 +240,40 @@ export async function drawObject(app) {
 
 
   // 아바타
-  let standing = await avatar.actinos.standing()
-  let run = await avatar.actinos.run()
-  let teleport = await avatar.actinos.teleport()
-  let appear = await avatar.actinos.appear() 
-  avatarContainer.addChild(teleport);
+  const megaman = new Megaman()
+  await megaman.init()  
+  
+  let standing = megaman.standing()
+  let run = megaman.run()
+  let teleport = megaman.teleport()
+  let appear = megaman.appear() 
+  // avatarContainer.addChild(teleport);
   
   let is_telport = false
-  ticker.add(startTeleport)
-  function startTeleport() {    
-    teleport.y = teleport.y+50
-    if(teleport.y > 660 ){
-      ticker.remove(startTeleport)
-      avatarContainer.removeChild(teleport)
-      avatarContainer.addChild(appear);      
-    }
-  }  
-  appear.loop = false
-  appear.onComplete = () => {
-    is_telport = true
-    avatarContainer.removeChild(appear)
-    avatarContainer.addChild(standing);          
-  }
+  // ticker.add(startTeleport)
+  // function startTeleport() {    
+  //   teleport.y = teleport.y+50
+  //   if(teleport.y > 660 ){
+  //     ticker.remove(startTeleport)
+  //     avatarContainer.removeChild(teleport)
+  //     avatarContainer.addChild(appear);      
+  //   }
+  // }  
+  // appear.loop = false
+  // appear.onComplete = () => {
+  //   is_telport = true
+  //   avatarContainer.removeChild(appear)
+  //   avatarContainer.addChild(standing);          
+  // }
+
+  // 아바타
+  const elric = new Elric()
+  await elric.init()  
+  
+  let elric_standing = elric.standing()
+  let elric_run = elric.run()  
+  let elric_alchemy = elric.alchemy()  
+  avatarContainer.addChild(elric_standing);  
 
   // 좌 우 클릭영역
   const leftArea = new PIXI.Graphics();

@@ -77,9 +77,13 @@ const manifestExample = {
     name: 'load-avatar',
     assets: [
         {
-            name: 'avatar',
+            name: 'megaman',
             srcs: '/assets/img/avatar/megaman.png',
         },
+        {
+          name: 'elric',
+          srcs: '/assets/img/avatar/elric.png',
+      },        
     ],
   },{
     name: 'load-font',
