@@ -4,9 +4,8 @@ export async function loadAssets() {
 
   await PIXI.Assets.init({ manifest: manifestExample });  
   PIXI.Assets.backgroundLoadBundle(['load-background', 'load-object', 'load-avatar'], (onProgress)=> {
-    console.log(onProgress)
-  });
-  const loadScreenAssets = await PIXI.Assets.loadBundle('load-object');
+    
+  });  
 
 }
 

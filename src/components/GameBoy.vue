@@ -51,7 +51,7 @@ function onMouseUp() {
     
     <!-- <div class="nintendo">Nintendo</div> -->
     <div class="label">
-        <div class="brand">nintendo</div>
+        <div class="brand">nintendo </div>
         <div class="title">GAME BOY</div>
         <div class="subtitle">
           <!-- 
@@ -81,14 +81,14 @@ function onMouseUp() {
         <div class="middle"></div>
       </div>
       <div class="a-b">
-        <div class="b"></div>
-        <div class="a"></div>
+        <div class="b" @mousedown="onClickLeft" @mouseup="onMouseUp" @touchstart="onClickLeft" @touchend="onMouseUp"></div>
+        <div class="a" @mousedown="onClickRight" @mouseup="onMouseUp" @touchstart="onClickRight" @touchend="onMouseUp"></div>
       </div>
     </div>
     
     <div class="start-select">
-      <div class="select">SELECT</div>
-      <div class="start">START</div>
+      <div class="select" @mousedown="onClickLeft" @mouseup="onMouseUp" @touchstart="onClickLeft" @touchend="onMouseUp">SELECT</div>
+      <div class="start" @mousedown="onClickRight" @mouseup="onMouseUp" @touchstart="onClickRight" @touchend="onMouseUp">START</div>
     </div>
     
     <!-- <div class="speaker">

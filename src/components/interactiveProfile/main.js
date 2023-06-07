@@ -24,9 +24,7 @@ export async function drawPixi(el) {
   el.value.appendChild(app.view);   
 
   // 현재 디스플레이 사이즈와 다를경우 화면 리사이징
-  if(el.value.clientWidth < standardWidth) {
-    resizeApp()    
-  }  
+  resizeApp()
 
 
   const graphics = new PIXI.Graphics();
@@ -71,43 +69,31 @@ export async function drawPixi(el) {
 
   // 애플리케이션 리사이징
   function resizeApp() {  
+    let ratio_1 = 0.5625
+    let ratio_2 = 0.75      
+    let clientWidth = el.value.clientWidth
+    let clientHeight = el.value.clientHeight
+    let currentRatio = window.innerHeight/window.innerWidth    
 
-    if(el.value.clientWidth !== null && el.value.clientHeight !== null) {      
-      
-      let ratio_1 = 0.5625
-      let ratio_2 = 0.75      
-      let clientWidth = el.value.clientWidth
-      let clientHeight = el.value.clientHeight
-      let currentRatio = clientHeight/clientWidth
+    if(currentRatio > ratio_1) {      
+      const targetWidth = standardWidth;
+      const targetHeight = standardHeight
+      app.renderer.resize(targetWidth, targetHeight);   
+      app.view.style.objectFit = 'cover';
+      app.view.style.width = clientWidth + 'px';
+      app.view.style.height = clientHeight + 'px';               
+    }else {      
+      // const targetWidth = standardWidth;
+      // const targetHeight = standardHeight
+      // app.renderer.resize(targetWidth, targetHeight);   
+      // app.view.style.objectFit = 'cover';
+      // app.view.style.width = clientWidth + 'px';
+      // app.view.style.height = clientHeight + 'px';      
 
-      if(currentRatio > ratio_1) {
-        const targetWidth = standardWidth;
-        const targetHeight = standardHeight
-        app.renderer.resize(targetWidth, targetHeight);   
-        app.view.style.objectFit = 'cover';
-        app.view.style.width = clientWidth + 'px';
-        app.view.style.height = clientHeight + 'px';               
-      }else {
-        app.view.style.objectFit = 'contain';
-        app.view.style.width = clientWidth + 'px';
-        app.view.style.height = clientHeight + 'px';
-      }    
-    }else {
-      currentRatio = window.innerHeight/window.innerWidth 
-
-      if(currentRatio > ratio_1) {
-        const targetWidth = standardWidth;
-        const targetHeight = standardHeight
-        app.renderer.resize(targetWidth, targetHeight);   
-        app.view.style.objectFit = 'cover';
-        app.view.style.width = window.innerWidth + 'px';
-        app.view.style.height = window.innerHeight + 'px';               
-      }else {
-        app.view.style.objectFit = 'contain';
-        app.view.style.width = window.innerWidth + 'px';
-        app.view.style.height = window.innerHeight + 'px';
-      }
+      app.view.style.width = window.innerWidth + 'px';
+      app.view.style.height = window.innerWidth*ratio_1 + 'px';           
     }
+
   }
 
   window.addEventListener('resize', resizeApp);
