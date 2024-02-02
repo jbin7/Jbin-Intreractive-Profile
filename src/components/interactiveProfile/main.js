@@ -30,7 +30,7 @@ export async function drawPixi(el) {
   const graphics = new PIXI.Graphics();
 
   // Rectangle
-  graphics.beginFill(0x1a5289);
+  graphics.beginFill(0x222222);
   graphics.drawRect(0, 0, standardWidth, standardHeight);
   graphics.endFill();
 
@@ -38,12 +38,12 @@ export async function drawPixi(el) {
 
   const style = new PIXI.TextStyle({
     fontFamily: 'Arial',
-    fontSize: 36,
+    fontSize: 22,
     fontStyle: 'italic',
     fontWeight: 'bold',
-    fill: ['#ffffff', '#00ff99'], // gradient
+    fill: ['#ffffff'], // gradient
     stroke: '#4a1850',
-    strokeThickness: 5,
+    strokeThickness: 2,
     dropShadow: true,
     dropShadowColor: '#000000',
     dropShadowBlur: 4,
@@ -54,7 +54,7 @@ export async function drawPixi(el) {
     lineJoin: 'round',
   });
 
-  const loadingText = new PIXI.Text('loading..', style);
+  const loadingText = new PIXI.Text('Downloading Assets...', style);
   loadingText.anchor.set(0.5, 0.5)
   loadingText.x = standardWidth/2
   loadingText.y = standardHeight/2
@@ -63,7 +63,7 @@ export async function drawPixi(el) {
   
   await loadAssets()
 
-  await drawObject(app)
+  // await drawObject(app)
 
   
 
