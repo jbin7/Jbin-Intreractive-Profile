@@ -63,14 +63,21 @@ export async function drawPixi(el) {
   
   await loadAssets()
 
-  // await drawObject(app)
+  await drawObject(app)
 
   
 
   // 애플리케이션 리사이징
   function resizeApp() {  
+
+    if(el.value == null) {
+      return
+    }
+
     let ratio_1 = 0.5625
     let ratio_2 = 0.75      
+    
+    
     let clientWidth = el.value.clientWidth
     let clientHeight = el.value.clientHeight
     let currentRatio = window.innerHeight/window.innerWidth    
