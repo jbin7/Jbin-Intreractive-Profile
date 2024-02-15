@@ -15,7 +15,7 @@ window.addEventListener('resize', ()=> {
 
 <template>
   <div>    
-    <div class="mobile" v-if="state.size < 600" >
+    <div class="mobile" v-if="state.size < 500" >
       <game-boy/>
     </div>
     <div v-else>

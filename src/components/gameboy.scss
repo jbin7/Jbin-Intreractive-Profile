@@ -2,7 +2,7 @@
 
 
 .gameboy {
-  position:relative;
+  position:fixed;
   // width:380px;
   // height:700px;
   width: 100vw;
@@ -49,6 +49,8 @@
     background-color:#767189;
     color:#302058;
     box-shadow:0px 2px 0px black, 0px -2px 0px black, -2px 0px 0px black, 2px 0px 0px black;
+    display: flex;
+    justify-content: center;
     
     &::after {
       content:'';
