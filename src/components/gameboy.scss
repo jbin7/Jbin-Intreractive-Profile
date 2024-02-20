@@ -1,6 +1,11 @@
 * { box-sizing:border-box; }
 
 
+@media ( min-width: 600px ) {
+  html {
+  }
+}
+
 .gameboy {
   position:fixed;
   // width:380px;
@@ -125,8 +130,9 @@
       // width:340px;
       height: 120vw;
       width: 90vw;
-      border-radius:3px;
+      border-radius:8px;
       margin-bottom:15px;
+      
     }
     
 

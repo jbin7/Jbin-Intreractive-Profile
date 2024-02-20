@@ -1,28 +1,10 @@
 <script setup>
-import { reactive } from "vue"
-import GameDisplay from './components/GameDisplay.vue'
-import GameBoy from './components/GameBoy.vue'
-
-const state = reactive({
-  size: window.innerWidth
-})
-
-window.addEventListener('resize', ()=> {  
-  state.size = window.innerWidth
-});
+import GameBoy from "./components/GameBoy.vue"
 
 </script>
 
 <template>
-  <div>    
-    <div class="mobile" v-if="state.size < 500" >
-      <game-boy/>
-    </div>
-    <div v-else>
-      <game-display/>
-    </div>
-  </div>  
-  
+  <GameBoy/>
 </template>
 
 <style lang="scss">
