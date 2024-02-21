@@ -14,6 +14,7 @@ npm install
 
 ```sh
 npm run dev
+npm run dev -- --host 0.0.0.0      
 ```
 
 ### Compile and Minify for Production
